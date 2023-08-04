@@ -8,18 +8,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-        .jobs-row {
+
+    .jobs-row {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
     }
+
     .job-box {
-    width: 280px; /* Set the desired width for each job box */
-    height: 400px; /* Set the desired height for each job box */
+    width: 300px; /* Set the desired width for each job box */
+    height: 610px; /* Set the desired height for each job box */
     border: 1px solid #ccc;
     padding: 10px;
     margin: 10px;
-  }
+     }
+
     .job-box h3 {
       margin-top: 0;
     }
@@ -35,8 +38,6 @@
     }
 
 
-
-  
     .popup {
       position: fixed;
       top: 0;
@@ -68,12 +69,11 @@
       margin-top: 10px;
       text-align: center;
       
-    
       
     }
     .button{
-      margin-right: 10px;
-      background-color: rgb(243, 123, 123);
+    margin-right: 10px;
+    background-color: rgb(227, 162, 162);
     color: white;
     padding: 10px 20px;
     border: none;
@@ -85,16 +85,14 @@
       height: 440px;
       width: 830px;
       border-radius: 25px;
-      background-color: rgb(171, 241, 219);
+      background-color: rgb(186, 219, 209);
       
     
-      
-      
     }
 
     .savebtn{
-      margin-right: 10px;
-      background-color: rgb(114, 230, 68);
+    margin-right: 10px;
+    background-color: rgb(144, 205, 120);
     color: white;
     padding: 10px 20px;
     border: none;
@@ -105,32 +103,107 @@
     .head{
       text-align: center;
       margin-bottom: 50px;
-      
+    
       
     }
+    .ur{
+      background-color: lightsalmon;
+        }
 
   </style>
 </head>
-
 <body>
- 
 
+  <div class="container">
+
+    <div class="input-group search-bar">
+
+      <input type="text" class="form-control border" placeholder="Search" [(ngModel)]="searchQuery"
+
+        (ngModelChange)="search()" (keydown.ArrowUp)="navigateResults('up')"
+
+        (keydown.ArrowDown)="navigateResults('down')" (keydown.Enter)="selectResult()" />
+
+      <i class="fa fa-search"></i>
+
+      <button class="clear-button" (click)="clearSearch()">
+
+        <i class="fa fa-times"></i>
+
+      </button>
+
+    </div>
+
+    <div *ngIf="searchResults === null && searchQuery">
+
+      No results found.
+
+    </div>
+
+    <div *ngIf="searchResults !== null && searchResults.length === 0 && searchQuery">
+
+      No results found.
+
+    </div>
+
+  </div>
+
+
+  <div class="container">
+
+    <div class="search-results">
+
+      <div class="result" *ngFor="let result of searchResults; let i = index" [class.active]="i === selectedIndex"
+
+        (click)="selectResult()">
+
+        <div class="search-text" [innerHTML]="result.jobTitle | highlightPipe: searchQuery"
+
+          [ngClass]="{ 'highlighted': i === selectedIndex }">
+
+          {{ result.jobTitle }}
+
+        </div>
+
+        <span class="remove-icon" (click)="removeResult(result)">
+
+          <i class="fas fa-times"></i>
+
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
   <div class="body">
     <div class="container">
 <div class="jobs-row">
       <div class="job-box" *ngFor="let item of jobsList | slice:(currentPage - 1) * itemsPerPage:currentPage * itemsPerPage">
-        <h3>{{ item.jobTitle }}</h3>
+        <h3
+
+        [class.highlighted]="item.jobTitle.toLowerCase().includes(searchQuery.toLowerCase()) && searchQuery.length > 0 && item.jobTitle !== 'Software Engineer'">
+
+        {{ item.jobTitle }}</h3>
         <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Company: </span> {{ item.companyName }}</p>
+        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">JobTitle: </span> {{ item.jobTitle }}</p>
         <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Experience: </span> {{ item.experience }}</p>
         <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Skills: </span>{{ item.skills }}</p>
+        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">JobPositions: </span>{{ item.jobPositions }}</p>
         <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Job Type: </span>{{ item.jobType }}</p>
+        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Qualification: </span>{{ item.qualification }}</p>
+        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Posted Date: </span>{{ item.postedDate }}</p>
+        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">End Date: </span>{{ item.endDate }}</p>
+        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Salary: </span>{{ item.salary }}</p>
         <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Location: </span>{{ item.location }}</p>
-        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Job Description: </span> {{ item.jobDescription }}</p>
+        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Job Description: </span> {{ item.description }}</p>
         <p>
-          <button id="uploadBtn" (click)="showUploadPopup()">Upload Resume</button>
-          <button *ngIf="!item.applied" (click)="apply(item)">Apply</button>
+          <!-- <button id="uploadBtn" (click)="showUploadPopup()" class="btn btn-light ur">Upload Resume</button> -->
+          <button *ngIf="!item.applied" (click)="showUploadPopup(item)" class="btn btn-light">Upload Your Resume</button>
+<button *ngIf="item.applied" disabled class="btn btn-light">Resume Uploaded</button>
+<!-- ... Rest of the HTML ... -->
+          <button *ngIf="!item.applied" (click)="apply(item)" class="btn btn-primary">Apply</button>
           <span *ngIf="item.applied" class="btn btn-success">Applied</span>
-        
         </p>
       </div>
     </div>
@@ -154,18 +227,18 @@
  
   <div id="uploadPopup" class="popup" [ngClass]="{ 'active': showUploadPopupFlag }">
     <div class="popup-content upload">
+      
       <h3 class="head">Upload Your Resume</h3>
-      <input type="file" id="resumeInput">
+      <input type="file"  #resumeInput id="resumeInput">
+
       <div class="popup-buttons">
         <button (click)="cancelUploadPopup()" class="button">Cancel</button>
-        <button type="submit" class="savebtn">Save</button>
+       
+        <button (click)="saveResume(resumeInput)" class="savebtn">Save</button>
      
       </div>
     </div>
   </div>
-
-
-
 
 </body>
 

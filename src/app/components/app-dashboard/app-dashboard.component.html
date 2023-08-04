@@ -1,68 +1,25 @@
-<!-- 
- <!DOCTYPE html>
- <html lang="en">
- <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
- </head>
- <body>
-  <div class="container-fluid">
-    
-    <div class="row">
-
-      <div class="col-2">
-        <nav class="navbar navbar-light">
-          <ul class="navbar-nav flex-column">
-            <div class="sidebar-image">
-              <img src="https://play-lh.googleusercontent.com/7y6gd1TKP4skySj-zI3KUs9uw9bpC99EOQNKa6BefSUHzzesFpIex3pDXWCCDTYywLM" class="image"/>
-            </div>
-            <li class="nav-item">
-              <a class="nav-link size" routerLink="/app-dashboard/jobspage" style="color: white;">Jobs section</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link size" routerLink="/app-dashboard/app-applied" style="color: white;">Applied Jobs</a>
-            </li>
-      
-          </ul>
-        </nav>
-        
-        <div class="mt-auto">
-          <a  class="nav-link px-3 cursor-pointer sign-button" (click)="logout()">Sign out</a>
-        </div>
-      </div>
-    
-      <div class="col-10 p-0">
-        <router-outlet></router-outlet>
-      
-      </div>
-    </div>
-  </div> 
-  
- </body>
- </html>
-   -->
 
 
    <nav class="navbar navbar-expand-lg navbar-light  sticky-top"  style="background-color: #5b3953;">
-    <a class="navbar-brand" style="color: white; font-size: 20px;">Online jobs portal</a>
-    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button> -->
+    <!-- <a class="navbar-brand" style="color: white; font-size: 20px;">Online jobs portal</a> -->
+    <a class="navbar-brand" style="color: white; font-size: 20px;">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXLZM8y7stLF76RxI2Q3_VrAYGVEAS8Gz2Xg&usqp=CAU" alt="Online jobs portal" style="width:59px; height:59px; border-radius: 50%; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+    </a>
+
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" style="color: white; font-size: 20px;" routerLink="/app-dashboard/app-home">Home</a>
+          <a class="nav-link" routerLink="/app-dashboard/app-home" routerLinkActive="active" style="color: white; font-size: 20px;">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/app-dashboard/jobspage" style="color: white; font-size: 20px;">Jobs section</a>
+          <a class="nav-link" routerLink="/app-dashboard/jobspage" routerLinkActive="active" style="color: white; font-size: 20px;">Jobs Section</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/app-dashboard/app-applied" style="color: white; font-size: 20px;">Saved Jobs</a>
+          <a class="nav-link" routerLink="/app-dashboard/app-applied" routerLinkActive="active" style="color: white; font-size: 20px;">Saved Jobs</a>
         </li>
-</ul>
-
-</div>
+      </ul>
+    </div>
 <ul class="nav justify-content-end">
 <h2 style="color: white;">Hello {{fullName}}</h2>
 <li class="nav-item">

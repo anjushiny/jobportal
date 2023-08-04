@@ -14,8 +14,8 @@
       justify-content: space-between;
     }
     .job-box {
-    width: 280px; /* Set the desired width for each job box */
-    height: 400px; /* Set the desired height for each job box */
+    width: 300px; /* Set the desired width for each job box */
+    height: 500px; /* Set the desired height for each job box */
     border: 1px solid #ccc;
     padding: 10px;
     margin: 10px;
@@ -40,16 +40,39 @@
  
 
   <div class="body">
+
     <div class="container">
+
 <div class="jobs-row">
+
       <div class="job-box" *ngFor="let item of displayedAppliedJobs">
+
         <h3>{{ item.jobTitle }}</h3>
+
         <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Company: </span> {{ item.companyName }}</p>
+
+        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">JobTitle: </span> {{ item.jobTitle }}</p>
+
         <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Experience: </span> {{ item.experience }}</p>
+
         <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Skills: </span>{{ item.skills }}</p>
+
+        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">JobPositions: </span>{{ item.jobPositions }}</p>
+
         <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Job Type: </span>{{ item.jobType }}</p>
+
+        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Qualification: </span>{{ item.qualification }}</p>
+
+        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Posted Date: </span>{{ item.postedDate }}</p>
+
+        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">End Date: </span>{{ item.endDate }}</p>
+
+        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Salary: </span>{{ item.salary }}</p>
+
         <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Location: </span>{{ item.location }}</p>
-        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Job Description: </span> {{ item.jobDescription }}</p>
+
+        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Job Description: </span> {{ item.description }}</p>
+
        
       </div>
     </div>
@@ -75,93 +98,3 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 
-
-
-
-
-
-
-
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
-</head>
-<h2 class="heading">JOBS APPLIED</h2>
-<body>
-  <div class="body">
-    <div class="container">
-      
-      <table class="table  table-danger table-bordered">
-        <thead>
-          <tr>
-            <th>JOB ID</th>
-            <th>COMPANY</th>
-            <th>JOB TITLE</th>
-            <th>EXPERIENCE</th>
-            <th>SKILLS</th>
-            <th>JOB TYPE</th>
-            <th>LOCATION</th>
-            <th>JOB DESCRIPTION</th>
-
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of displayedAppliedJobs">
-            <td>{{ item.jobId }}</td>
-            <td>{{ item.companyName }}</td>
-            <td>{{ item.jobTitle }}</td>
-            <td>{{ item.experience }}</td>
-            <td>{{ item.skills }}</td>
-            <td>{{ item.jobType }}</td>
-            <td>{{ item.location }}</td>
-            <td>{{ item.jobDescription }}</td>
-          </tr>
-          <tr *ngIf="appliedJobs.length === 0">
-            <td colspan="6">No jobs found</td>
-          </tr>
-        </tbody>
-      </table>
-   
-      <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-          <li class="page-item" [ngClass]="{ 'disabled': currentPage === 1 }">
-            <a class="page-link" tabindex="-1" (click)="previousPage()">Previous</a>
-          </li>
-         
-          <li class="page-item" [ngClass]="{ 'disabled': currentPage === totalPages }">
-            <a class="page-link" (click)="nextPage()">Next</a>
-          </li>
-        </ul>
-      </nav>
-      <h5>Page: {{ currentPage }} of {{ totalPages }}</h5> 
-    </div>
-  </div>
-  
-</body>
-</html> -->

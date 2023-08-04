@@ -1,151 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-</head>
-<body>
-
-
-
-
-
-
-
-  <div class="body">
-    <div class="container">
-      <table class="table table-success table-striped">
-        <thead>
-          <tr>
-            <th>JOB ID</th>
-            <th>COMPANY</th>
-            <th>JOB TITLE</th>
-            <th>EXPERIENCE</th>
-            <th>SKILLS</th>
-            <th>JOB TYPE</th>
-            <th>LOCATION</th>
-            <th>JOB DESCRIPTION</th>
-            <th>ACTIONS</th>
-           
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of jobsList | slice:(currentPage - 1) * itemsPerPage:currentPage * itemsPerPage">
-            <td>{{ item.jobId }}</td>
-            <td>{{ item.companyName }}</td>
-            <td>{{ item.jobTitle }}</td>
-            <td>{{ item.experience }}</td>
-            <td>{{ item.skills }}</td>
-            <td>{{ item.jobType }}</td>
-            <td>{{ item.location }}</td>
-            <td>{{ item.jobDescription }}</td>
-            <td>
-
-              <button type="button" class="btn btn-light mr-1"
-
-              data-bs-toggle="modal" data-bs-target="#exampleModal"
-
-              (click)="showEditForm(item)"
-
-              data-backdrop="static" data-keyboard="false">
-
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#007bff" class="bi bi-pencil-square" viewBox="0 0 16 16">
-
-          <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-
-          <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-
-        </svg>
-
-      </button>
-
-     
-
-      <button type="button" class="btn btn-light mr-1"
-
-      (click)="delete(item.jobId)">
-
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#dc3545" class="bi bi-trash" viewBox="0 0 16 16">
-
-          <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
-
-          <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
-
-                  </svg>
-
-                </button>
-
-            </td>
-            
-          
-         
-        </tr>
-          <tr *ngIf="jobsList.length === 0">
-            <td colspan="6">No jobs found</td>
-          </tr>
-        
-        </tbody>
-      </table>
-      <nav aria-label="Page navigation example">
-         <ul class="pagination justify-content-center">
-          <li class="page-item" [ngClass]="{ 'disabled': currentPage === 1 }">
-            <a class="page-link"  tabindex="-1" (click)="previousPage()">Previous</a>
-
-          </li>
-        
-          <li class="page-item" [ngClass]="{ 'disabled': currentPage === totalPages }">
-            <a class="page-link" (click)="nextPage()">Next</a>
-          </li>
-        </ul>
-      
-        <h5>Page: {{ currentPage }} of {{ totalPages }}</h5> 
-     
-      </nav>
-    </div>
-  </div>
-  <div id="popup-form" class="popup-overlay" [ngClass]="{ 'show': showEditFormFlag }">
-    <div class="popup-content">
-    <form (ngSubmit)="onSubmit()">
-    <label>JOB ID</label>
-    <input type="text" [(ngModel)]="selectedJob.jobId" name="jobId" required>
-  
-    <label>COMPANY</label>
-    <input type="text" [(ngModel)]="selectedJob.companyName" name="companyName" required>
-  
-    <label>JOB TITLE</label>
-    <input type="text" [(ngModel)]="selectedJob.jobTitle" name="jobTitle" required>
-  
-    <label>EXPERIENCE</label>
-    <input type="text" [(ngModel)]="selectedJob.experience" name="experience" required>
-  
-    <label>SKILLS</label>
-    <input type="text" [(ngModel)]="selectedJob.skills" name="skills" required>
-  
-    <label>JOB TYPE</label>
-    <input type="text" [(ngModel)]="selectedJob.jobType" name="jobType" required>
-  
-    <label>LOCATION</label>
-    <input type="text" [(ngModel)]="selectedJob.location" name="location" required>
-  
-    <label>JOB DESCRIPTION</label>
-    <textarea [(ngModel)]="selectedJob.jobDescription" name="jobDescription" required></textarea>
-    <div class="form-buttons">
-      <button type="submit">Save</button>
-      <button type="button" (click)="cancelEditForm()">Cancel</button>
-    </div>
-  </form>
-  </div>
-  </div>
-</body>
-
-
-
-
-</html> -->
-
-
-
+<!-- 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -154,86 +7,182 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-        .jobs-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-    }
-    .job-box {
-    width: 280px; /* Set the desired width for each job box */
-    height: 400px; /* Set the desired height for each job box */
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin: 10px;
-  }
-    .job-box h3 {
-      margin-top: 0;
-    }
-
-    .job-box p {
-      margin-bottom: 5px;
-    }
-
-    .view-more {
-      color: blue;
-      cursor: pointer;
-      text-decoration: underline;
-    }
-  </style>
 </head>
 
 <body>
- 
+
+  <div class="container">
+
+    <div class="row">
+
+      <div class="position-relative">
+
+        <input class="form-control border" type="text" name="search" [(ngModel)]="searchText" placeholder="Search by jobTitle, jobType, companyLocation, or companyName" (keydown.enter)="onEnterPressed($event)">
+
+        <span class="search-icon" (click)="search()"><i class="fa fa-search" aria-hidden="true"></i></span>
+
+        <span class="clear-icon" (click)="clearSearch()"><i class="fa fa-remove" aria-hidden="true"></i></span>
+
+      </div>
+
+        </div>
+
+  </div>
 
   <div class="body">
     <div class="container">
+
 <div class="jobs-row">
-      <div class="job-box" *ngFor="let item of jobsList | slice:(currentPage - 1) * itemsPerPage:currentPage * itemsPerPage">
-        <h3>{{ item.jobTitle }}</h3>
-        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Company: </span> {{ item.companyName }}</p>
-        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Experience: </span> {{ item.experience }}</p>
-        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Skills: </span>{{ item.skills }}</p>
-        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Job Type: </span>{{ item.jobType }}</p>
-        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Location: </span>{{ item.location }}</p>
-        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Job Description: </span> {{ item.jobDescription }}</p>
-       <p>
-        <button type="button" class="btn btn-light mr-1"
 
-        data-bs-toggle="modal" data-bs-target="#exampleModal"
+      <div class="job-box"
 
-        (click)="showEditForm(item)"
+      *ngFor="let item of jobsList | filter:searchText | slice:(currentPage - 1) * itemsPerPage:currentPage * itemsPerPage">
 
-        data-backdrop="static" data-keyboard="false">
+      <h3
 
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#007bff" class="bi bi-pencil-square" viewBox="0 0 16 16">
+        class="item.jobTitle.toLowerCase().includes(searchText.toLowerCase()) && searchText.length > 0 ">
 
-    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+        {{ item.jobTitle }}
 
-    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+      </h3>
 
-  </svg>
+      <p>
 
-</button>
+        <span style="color: rgb(8, 8, 8); font-weight: 600;">Job Title: </span>
+
+        <ng-container *ngIf="searchText && item.jobTitle">
+
+          <ng-container *ngFor="let part of highlightText(item.jobTitle)">
+
+            <span [class.highlighted]="part.highlight">{{ part.text }}</span>
+
+          </ng-container>
+
+        </ng-container>
+
+        <span *ngIf="!searchText || !item.jobTitle">{{ item.jobTitle }}</span>
+
+      </p>
+
+     <p>
+
+        <span style="color: rgb(8, 8, 8); font-weight: 600;">Company Name: </span>
+
+        <ng-container *ngIf="searchText && item.companyName">
+
+          <ng-container *ngFor="let part of highlightText(item.companyName)">
+
+            <span [class.highlighted]="part.highlight">{{ part.text }}</span>
+
+          </ng-container>
+
+        </ng-container>
+
+        <span *ngIf="!searchText || !item.companyName">{{ item.companyName }}</span>
+
+      </p>
+
+      <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Experience: </span> {{ item.experience }}</p>
+
+      <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Skills: </span>{{ item.skills }}</p>
+
+      <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Job Positions: </span>{{ item.jobPositions }}</p>
+
+   
+
+    <p>
+
+        <span style="color: rgb(8, 8, 8); font-weight: 600;">Job Type: </span>
+
+        <ng-container *ngIf="searchText && item.jobType">
+
+          <ng-container *ngFor="let part of highlightText(item.jobType)">
+
+            <span [class.highlighted]="part.highlight">{{ part.text }}</span>
+
+          </ng-container>
+
+        </ng-container>
+
+        <span *ngIf="!searchText || !item.jobType">{{ item.jobType }}</span>
+
+    </p>
+
+      <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Qualification: </span>{{ item.qualification }}</p>
+
+      <p><span style="color: rgb(8, 8, 8); font-weight: 600;">PostedDate: </span>{{ item.postedDate }}</p>
+
+      <p><span style="color: rgb(8, 8, 8); font-weight: 600;">EndDate: </span>{{ item.endDate }}</p>
+ 
+
+     <p>
+
+        <span style="color: rgb(8, 8, 8); font-weight: 600;">Location: </span>
+
+         <ng-container *ngIf="searchText && item.location">
+
+          <ng-container *ngFor="let part of highlightText(item.location)">
+
+             <span [class.highlighted]="part.highlight">{{ part.text }}</span>
+
+          </ng-container>
+
+        </ng-container>
+
+        <span *ngIf="!searchText || !item.location">{{ item.location }}</span>
+
+    </p>
+
+    <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Job Description: </span> {{ item.description }}</p>
+
+   <p>
+
+        <button type="button" class="btn btn-light mr-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
+
+          (click)="showEditForm(item)" data-backdrop="static" data-keyboard="false">
+
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#007bff" class="bi bi-pencil-square"
+
+            viewBox="0 0 16 16">
+
+            <path
+
+              d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
 
 
+            <path fill-rule="evenodd"
 
-<button type="button" class="btn btn-light mr-1"
+              d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
 
-(click)="delete(item.jobId)">
+          </svg>
 
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#dc3545" class="bi bi-trash" viewBox="0 0 16 16">
+        </button>
 
-    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+        <button type="button" class="btn btn-light mr-1" (click)="delete(item.jobId)"> 
+      
 
-    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#dc3545" class="bi bi-trash"
 
-            </svg>
+            viewBox="0 0 16 16">
 
-          </button>
+            <path
 
-       </p>
-      </div>
+              d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+
+            <path
+
+              d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+
+          </svg>
+
+        </button>
+
+      </p>
+
+    </div>
+
+  </div>
+      
     </div>
     
       <nav aria-label="Page navigation example">
@@ -251,41 +200,369 @@
       </nav>
       <h5 class="justify-content-end">Page: {{ currentPage }} of {{ totalPages }}</h5>
     </div>
-  </div>
-  <div id="popup-form" class="popup-overlay" [ngClass]="{ 'show': showEditFormFlag }">
-    <div class="popup-content">
-    <form (ngSubmit)="onSubmit()">
-    <label>JOB ID</label>
-    <input type="text" [(ngModel)]="selectedJob.jobId" name="jobId" required>
-  
-    <label>COMPANY</label>
-    <input type="text" [(ngModel)]="selectedJob.companyName" name="companyName" required>
-  
-    <label>JOB TITLE</label>
-    <input type="text" [(ngModel)]="selectedJob.jobTitle" name="jobTitle" required>
-  
-    <label>EXPERIENCE</label>
-    <input type="text" [(ngModel)]="selectedJob.experience" name="experience" required>
-  
-    <label>SKILLS</label>
-    <input type="text" [(ngModel)]="selectedJob.skills" name="skills" required>
-  
-    <label>JOB TYPE</label>
-    <input type="text" [(ngModel)]="selectedJob.jobType" name="jobType" required>
-  
-    <label>LOCATION</label>
-    <input type="text" [(ngModel)]="selectedJob.location" name="location" required>
-  
-    <label>JOB DESCRIPTION</label>
-    <textarea [(ngModel)]="selectedJob.jobDescription" name="jobDescription" required></textarea>
-    <div class="form-buttons">
-      <button type="submit">Save</button>
-      <button type="button" (click)="cancelEditForm()">Cancel</button>
-    </div>
-  </form>
-  </div>
-  </div>
- 
-</body>
 
+<div id="popup-form" class="popup-overlay" [ngClass]="{ 'show': showEditFormFlag }">
+  <div class="popup-content">
+    <form (ngSubmit)="onSubmit()" class="form">
+      <div class="form-fields">
+        <div class="field-group">
+          <label for="companyName">COMPANY NAME</label>
+          <input type="text" [(ngModel)]="selectedJob.companyName" id="companyName" name="companyName" class="form-control anju" required>
+        </div>
+        <div class="field-group">
+          <label for="jobTitle">JOB TITLE</label>
+          <input type="text" [(ngModel)]="selectedJob.jobTitle" id="jobTitle" name="jobTitle" class="form-control anju" required>
+        </div>
+        <div class="field-group">
+          <label for="experience">EXPERIENCE</label>
+          <input type="text" [(ngModel)]="selectedJob.experience" id="experience" name="experience" class="form-control anju" required>
+        </div>
+        <div class="field-group">
+          <label for="skills">SKILLS</label>
+          <input type="text" [(ngModel)]="selectedJob.skills" id="skills" name="skills" class="form-control anju" required>
+        </div>
+        <div class="field-group">
+          <label for="jobPositions">JOB POSITIONS</label>
+          <input type="text" [(ngModel)]="selectedJob.jobPositions" id="jobPositions" name="jobPositions" class="form-control anju" required>
+        </div>
+        <div class="field-group">
+          <label for="jobType">JOB TYPE</label>
+          <input type="text" [(ngModel)]="selectedJob.jobType" id="jobType" name="jobType" class="form-control anju" required>
+        </div>
+        <div class="field-group">
+          <label for="qualification">QUALIFICATION</label>
+          <input type="text" [(ngModel)]="selectedJob.qualification" id="qualification" name="qualification" class="form-control anju" required>
+        </div>
+        <div class="field-group">
+          <label for="postedDate">POSTED DATE</label>
+          <input type="date" [(ngModel)]="selectedJob.postedDate" id="postedDate" name="postedDate" class="form-control anju" required>
+        </div>
+        <div class="field-group">
+          <label for="endDate">END DATE</label>
+          <input type="date" [(ngModel)]="selectedJob.endDate" id="endDate" name="endDate" class="form-control anju" required>
+        </div>
+        <div class="field-group">
+          <label for="salary">SALARY</label>
+          <input type="text" [(ngModel)]="selectedJob.salary" id="salary" name="salary" class="form-control anju" required>
+        </div>
+        <div class="field-group">
+          <label for="location">LOCATION</label>
+          <input type="text" [(ngModel)]="selectedJob.location" id="location" name="location" class="form-control anju" required>
+        </div>
+        <div class="field-group">
+          <label for="description">JOB DESCRIPTION</label>
+          <textarea [(ngModel)]="selectedJob.description" id="description" name="description" class="form-control anju" required></textarea>
+        </div>
+      </div>
+      <div class="form-buttons">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelEditForm()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+  <div class="empty-jobs-container" *ngIf="jobsList.length === 0">
+    <h1>NO JOBS POSTED</h1>
+    <button routerLink="/dashboard/jobs" class="post-jobs-button">Click here to post</button>
+    <div class="flowing-image"></div>
+  </div>
+  
+
+  <div *ngIf="jobsList.length > 0">
+    <div class="container">
+
+      <div class="row">
+        <div class="position-relative"  style="margin-top: 25px;" >
+          <input class="form-control border" type="text" name="search" [(ngModel)]="searchText"
+                placeholder="Type here to search Jobs"
+            (keydown.enter)="onEnterPressed($event)">
+          <span class="search-icon" (click)="search()"><i class="fa fa-search" aria-hidden="true"></i></span>
+          <span class="clear-icon" (click)="clearSearch()"><i class="fa fa-remove" aria-hidden="true"></i></span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="body">
+      <div class="container">
+
+        <div class="jobs-row">
+
+          <div class="job-box"
+            *ngFor="let item of jobsList | filter:searchText | slice:(currentPage - 1) * itemsPerPage:currentPage * itemsPerPage">
+
+            <h3
+              class="item.jobTitle.toLowerCase().includes(searchText.toLowerCase()) && searchText.length > 0">
+
+              {{ item.jobTitle }}
+
+            </h3>
+
+            <p>
+
+              <span style="color: rgb(8, 8, 8); font-weight: 600;">Job Title: </span>
+      
+              <ng-container *ngIf="searchText && item.jobTitle">
+      
+                <ng-container *ngFor="let part of highlightText(item.jobTitle)">
+      
+                  <span [class.highlighted]="part.highlight">{{ part.text }}</span>
+      
+                </ng-container>
+      
+              </ng-container>
+      
+              <span *ngIf="!searchText || !item.jobTitle">{{ item.jobTitle }}</span>
+      
+            </p>
+      
+           <p>
+      
+              <span style="color: rgb(8, 8, 8); font-weight: 600;">Company Name: </span>
+      
+              <ng-container *ngIf="searchText && item.companyName">
+      
+                <ng-container *ngFor="let part of highlightText(item.companyName)">
+      
+                  <span [class.highlighted]="part.highlight">{{ part.text }}</span>
+      
+                </ng-container>
+      
+              </ng-container>
+      
+              <span *ngIf="!searchText || !item.companyName">{{ item.companyName }}</span>
+      
+            </p>
+      
+            <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Experience: </span> {{ item.experience }}</p>
+      
+            <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Skills: </span>{{ item.skills }}</p>
+      
+            <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Job Positions: </span>{{ item.jobPositions }}</p>
+      
+         
+          <p>
+      
+              <span style="color: rgb(8, 8, 8); font-weight: 600;">Job Type: </span>
+      
+              <ng-container *ngIf="searchText && item.jobType">
+      
+                <ng-container *ngFor="let part of highlightText(item.jobType)">
+      
+                  <span [class.highlighted]="part.highlight">{{ part.text }}</span>
+      
+                </ng-container>
+      
+              </ng-container>
+      
+              <span *ngIf="!searchText || !item.jobType">{{ item.jobType }}</span>
+      
+          </p>
+      
+            <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Qualification: </span>{{ item.qualification }}</p>
+      
+            <p><span style="color: rgb(8, 8, 8); font-weight: 600;">PostedDate: </span>{{ item.postedDate }}</p>
+      
+            <p><span style="color: rgb(8, 8, 8); font-weight: 600;">EndDate: </span>{{ item.endDate }}</p>
+       
+      
+           <p>
+      
+              <span style="color: rgb(8, 8, 8); font-weight: 600;">Location: </span>
+      
+               <ng-container *ngIf="searchText && item.location">
+      
+                <ng-container *ngFor="let part of highlightText(item.location)">
+      
+                   <span [class.highlighted]="part.highlight">{{ part.text }}</span>
+      
+                </ng-container>
+      
+              </ng-container>
+      
+              <span *ngIf="!searchText || !item.location">{{ item.location }}</span>
+      
+          </p>
+      
+          <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Job Description: </span> {{ item.description }}</p>
+      
+         <p>
+      
+              <button type="button" class="btn btn-light mr-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
+      
+                (click)="showEditForm(item)" data-backdrop="static" data-keyboard="false">
+      
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#007bff" class="bi bi-pencil-square"
+      
+                  viewBox="0 0 16 16">
+      
+                  <path
+      
+                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+      
+      
+                  <path fill-rule="evenodd"
+      
+                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+      
+                </svg>
+      
+              </button>
+      
+              <button type="button" class="btn btn-light mr-1" (click)="delete(item.jobId)"> 
+            
+      
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#dc3545" class="bi bi-trash"
+      
+                  viewBox="0 0 16 16">
+      
+                  <path
+      
+                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+      
+                  <path
+      
+                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+      
+                </svg>
+      
+              </button>
+      
+            </p>
+      
+          </div>
+
+          </div>
+
+        </div>
+
+      
+      <!-- <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+          <li class="page-item" [ngClass]="{ 'disabled': currentPage === 1 }">
+            <a class="page-link" tabindex="-1" (click)="previousPage()">Previous</a>
+          </li>
+
+          <li class="page-item" [ngClass]="{ 'disabled': currentPage === totalPages }">
+            <a class="page-link" (click)="nextPage()">Next</a>
+          </li>
+
+        </ul>
+
+      </nav>
+      <h5 class="justify-content-end">Page: {{ currentPage }} of {{ totalPages }}</h5> -->
+      <div style="display: flex; flex-direction: column; align-items: flex-end; margin-top: 20px;">
+        <nav aria-label="Page navigation example">
+          <ul style="display: flex; justify-content: flex-end; list-style: none; padding: 10;">
+            <li style="margin: 07px;">
+              <a
+                class="page-link-button"
+                [ngClass]="{ 'disabled': currentPage === 1 }"
+                (click)="previousPage()"
+                tabindex="-1"
+              >
+                Previous
+              </a>
+            </li>
+      
+            <li style="margin: 07px;">
+              <a
+                class="page-link-button"
+                [ngClass]="{ 'disabled': currentPage === totalPages }"
+                (click)="nextPage()"
+              >
+                Next
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <h5 style="margin-top: 15px;">Page: {{ currentPage }} of {{ totalPages }}</h5>
+      </div>
+     
+    </div>
+
+  </div>
+
+  <div id="popup-form" class="popup-overlay" [ngClass]="{ 'show': showEditFormFlag }">
+    <div id="popup-form" class="popup-overlay" [ngClass]="{ 'show': showEditFormFlag }">
+      <div class="popup-content">
+        <form (ngSubmit)="onSubmit()" class="form">
+          <div class="form-fields">
+            <div class="field-group">
+              <label for="companyName">COMPANY NAME</label>
+              <input type="text" [(ngModel)]="selectedJob.companyName" id="companyName" name="companyName" class="form-control anju" required>
+            </div>
+            <div class="field-group">
+              <label for="jobTitle">JOB TITLE</label>
+              <input type="text" [(ngModel)]="selectedJob.jobTitle" id="jobTitle" name="jobTitle" class="form-control anju" required>
+            </div>
+            <div class="field-group">
+              <label for="experience">EXPERIENCE</label>
+              <input type="text" [(ngModel)]="selectedJob.experience" id="experience" name="experience" class="form-control anju" required>
+            </div>
+            <div class="field-group">
+              <label for="skills">SKILLS</label>
+              <input type="text" [(ngModel)]="selectedJob.skills" id="skills" name="skills" class="form-control anju" required>
+            </div>
+            <div class="field-group">
+              <label for="jobPositions">JOB POSITIONS</label>
+              <input type="text" [(ngModel)]="selectedJob.jobPositions" id="jobPositions" name="jobPositions" class="form-control anju" required>
+            </div>
+            <div class="field-group">
+              <label for="jobType">JOB TYPE</label>
+              <input type="text" [(ngModel)]="selectedJob.jobType" id="jobType" name="jobType" class="form-control anju" required>
+            </div>
+            <div class="field-group">
+              <label for="qualification">QUALIFICATION</label>
+              <input type="text" [(ngModel)]="selectedJob.qualification" id="qualification" name="qualification" class="form-control anju" required>
+            </div>
+            <div class="field-group">
+              <label for="postedDate">POSTED DATE</label>
+              <input type="date" [(ngModel)]="selectedJob.postedDate" id="postedDate" name="postedDate" class="form-control anju" required>
+            </div>
+            <div class="field-group">
+              <label for="endDate">END DATE</label>
+              <input type="date" [(ngModel)]="selectedJob.endDate" id="endDate" name="endDate" class="form-control anju" required>
+            </div>
+            <div class="field-group">
+              <label for="salary">SALARY</label>
+              <input type="text" [(ngModel)]="selectedJob.salary" id="salary" name="salary" class="form-control anju" required>
+            </div>
+            <div class="field-group">
+              <label for="location">LOCATION</label>
+              <input type="text" [(ngModel)]="selectedJob.location" id="location" name="location" class="form-control anju" required>
+            </div>
+            <div class="field-group">
+              <label for="description">JOB DESCRIPTION</label>
+              <textarea [(ngModel)]="selectedJob.description" id="description" name="description" class="form-control anju" required></textarea>
+            </div>
+          </div>
+          <div class="form-buttons">
+            <button type="submit" class="btn btn-success">Save</button>
+            <button type="button" class="btn btn-danger" (click)="cancelEditForm()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    <!-- Your existing popup form code -->
+    <!-- ... -->
+  </div>
+
+</div>
+
+</body>
 </html>

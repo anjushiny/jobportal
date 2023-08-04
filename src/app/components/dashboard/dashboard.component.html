@@ -1,138 +1,41 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
-</head>
-<body>
-  
- 
-  <div class="container-fluid">
-    
-    <div class="row">
 
-      <div class="col-2" style="background-color: #2B3467;">
-        <nav class="navbar navbar-light">
-          <ul class="navbar-nav flex-column">
-            <div class="sidebar-image">
-              <img src="https://play-lh.googleusercontent.com/7y6gd1TKP4skySj-zI3KUs9uw9bpC99EOQNKa6BefSUHzzesFpIex3pDXWCCDTYywLM" class="image"/>
-            </div>
-         
-            <li class="nav-item">
-              <a class="nav-link size" routerLink="/dashboard/home" style="color: white;">Jobs section</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link size" routerLink="/dashboard/jobs" style="color: white;">Post Jobsssss</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link size" routerLink="/dashboard/home" style="color: white;">   <h1 style="color: red;">Hello {{fullName}}</h1> </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link size" routerLink="/dashboard/jobs" style="color: white;"> </a>
-            </li>
-          </ul>
-        </nav>
-      
-        <div class="mt-auto">
-          <a  class="nav-link px-3 cursor-pointer sign-button" (click)="logout()">Sign out</a>
-        </div>
-      </div>
+
+   <nav class="navbar navbar-expand-lg navbar-light  sticky-top"  style="background-color: #3911eb;">
+    <!-- <a class="navbar-brand" style="color: white; font-size: 20px;">Online jobs portal</a> -->
+    <a class="navbar-brand" style="color: white; font-size: 20px;">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXLZM8y7stLF76RxI2Q3_VrAYGVEAS8Gz2Xg&usqp=CAU" alt="Online jobs portal" style="height: 59px; width: 59px; border-radius: 50%; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+    </a>
     
-      <div class="col-10 p-0">
-        <router-outlet></router-outlet>
-      
-      </div>
-    </div>
-  </div> 
-  
+    
    
-
-  
-</body>
-</html> -->
-
-
-
-<!-- 
- <!DOCTYPE html>
- <html lang="en">
- <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
- </head>
- <body>
-  <div class="container-fluid">
-    
-    <div class="row">
-
-      <div class="col-2">
-        <nav class="navbar navbar-light">
-          <ul class="navbar-nav flex-column">
-            <div class="sidebar-image">
-              <img src="https://play-lh.googleusercontent.com/7y6gd1TKP4skySj-zI3KUs9uw9bpC99EOQNKa6BefSUHzzesFpIex3pDXWCCDTYywLM" class="image"/>
-            </div>
-            <li class="nav-item">
-              <a class="nav-link size" routerLink="/app-dashboard/jobspage" style="color: white;">Jobs section</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link size" routerLink="/app-dashboard/app-applied" style="color: white;">Applied Jobs</a>
-            </li>
-      
-          </ul>
-        </nav>
-        
-        <div class="mt-auto">
-          <a  class="nav-link px-3 cursor-pointer sign-button" (click)="logout()">Sign out</a>
-        </div>
-      </div>
-    
-      <div class="col-10 p-0">
-        <router-outlet></router-outlet>
-      
-      </div>
-    </div>
-  </div> 
-  
- </body>
- </html>
-   -->
-
-
-   <nav class="navbar navbar-expand-lg navbar-light  sticky-top"  style="background-color: #5b3953;">
-    <a class="navbar-brand" style="color: white; font-size: 20px;">Online jobs portal</a>
-    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button> -->
-    <div class="collapse navbar-collapse" id="navbarNav">
+     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" style="color: white; font-size: 20px;" routerLink="/dashboard/client-home">Home</a>
+          <a class="nav-link" style="color: white; font-size: 24px;" routerLink="/dashboard/client-home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/dashboard/home"  style="color: white; font-size: 20px;">Jobs section</a>
+          <a class="nav-link" routerLink="/dashboard/home"  style="color: white; font-size: 24px;">Jobs section</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/dashboard/jobs" style="color: white; font-size: 20px;">Post Jobs</a>
+          <a class="nav-link" routerLink="/dashboard/jobs" style="color: white; font-size: 24px;">Post Jobs</a>
         </li>
 </ul>
 
-</div>
+</div> 
+
+
 <ul class="nav justify-content-end">
-<h2 style="color: white;">Hello {{fullName}}</h2>
+<h3 style="color: white;">Hello {{fullName}}!...</h3>
 <li class="nav-item">
   <a  class="nav-link px-3 cursor-pointer sign-button" (click)="logout()">Sign out</a>
  </li>
 </ul>
-
   </nav>
-
 
   <router-outlet></router-outlet>
 
 <!-- Footer -->
-<footer class="text-center text-lg-start  text-muted bg-body-tertiary" style="background-color: rgb(37, 33, 36);">
+<footer class="text-center text-lg-start  text-muted bg-body-tertiary" style="background-color: rgb(3, 3, 43); padding: 10px;">
  
   <!-- Section: Links  -->
   <section>
@@ -163,7 +66,6 @@
          
         </div>
      
-
         <!-- Grid column -->
         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
           <!-- Links -->
@@ -199,7 +101,6 @@
   </section>
   <!-- Section: Links  -->
 
- 
 </footer>
 <!-- Footer -->
 

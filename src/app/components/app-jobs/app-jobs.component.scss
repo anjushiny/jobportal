@@ -1,50 +1,102 @@
+.highlighted {
 
-// html, body {
-//   height: 100vh;
-  
-// padding: 0;
-// margin: 0;
-//   background-color: white;
-// }
+    background-color:pink;
+
+    font-weight: bold;
+
+  }
+  .border
+
+  {
+
+ border-color: black;
+
+ width: 1300px;
+
+  }
+
+  .search-bar {
+
+   position: relative;
+
+ }
 
 
+ .search-bar input[type="text"] {
 
-// .body{
-//     height: 100%;
-//     display: flex;
-//     margin: 0;
-//     padding: 0;
-//     width: auto;
-//     background-color: white;
-//   }
-  
-//   .container {
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//     align-items: center;
-//     height: 100vh;
-  
-//   }
-  
-//   form {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//   }
-  
-//   input {
-//     margin-bottom: 10px;
-//     width: 300px;
-//     padding: 10px;
-//     font-size: 16px;
-//   }
-  
-//   button {
-//     padding: 10px 20px;
-//   }
-//   .heading{
-//     text-align:center;
-//     color: rgb(98, 85, 243);
-//     font-size: 50px;
-//   }
+   padding-right: 30px; /* Adjust the padding to create space for the icon */
+
+ }
+
+
+ .search-bar .fa-search {
+
+   position: absolute;
+
+   right: 50px; /* Adjust the right value to position the icon as desired */
+
+   top: 50%;
+
+   transform: translateY(-50%);
+
+
+ }
+
+ .search-bar .clear-button {
+
+   position: absolute;
+
+   right: 10px; /* Adjust the right value to position the clear button */
+
+   top: 50%;
+
+   transform: translateY(-50%);
+
+   border: none;
+
+   background: transparent;
+
+   cursor: pointer;
+
+ }
+
+
+ .search-bar .clear-button i {
+
+   color: #999; /* Adjust the color of the clear button icon */
+
+ }
+
+
+ .result {
+
+   display: flex;
+
+   align-items: center;
+
+   padding: 10px;
+
+   cursor: pointer;
+
+   display: flex;
+
+   align-items: center;
+
+ }
+
+
+ .search-text {
+
+   flex-grow: 1;
+
+   margin-right: 10px;
+
+ }
+
+ .remove-icon {
+
+   cursor: pointer;
+
+   margin-left: 10px;
+
+ }

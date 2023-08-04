@@ -17,10 +17,6 @@ import { ClientHomeComponent } from './components/client-home/client-home.compon
 
 
 
-
-
-
-
 const routes: Routes = [
   {path:'', redirectTo:'login', pathMatch:'full'},
   {path:'login', component:LoginComponent},
@@ -30,14 +26,22 @@ const routes: Routes = [
     
     {path: 'jobspage', component:AppJobsComponent},
     { path: 'app-applied', component: AppAppliedComponent },
+
+    { path: '', redirectTo: 'app-home', pathMatch: 'full' },
     {path:'app-home', component:AppHomeComponent},
+    { path: 'post-jobs', component: JobsComponent },
   ]},
   {path:'signup', component:SignupComponent},
   {path:'app-signup', component:AppSignupComponent},
   {path:'dashboard', component:DashboardComponent, canActivate:[AuthGuard], children:[
     
     {path: 'home', component:JobssectionComponent},
+
     { path: 'jobs', component: JobsComponent },
+
+
+  
+    { path: '', redirectTo: 'client-home', pathMatch: 'full' },
     { path: 'client-home', component: ClientHomeComponent }
   ]
 }

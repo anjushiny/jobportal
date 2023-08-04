@@ -3,4 +3,5 @@ export class TokenApiModel{
     refreshToken!:string;
   static accessToken: string;
   static refresnToken: any;
+  
 }

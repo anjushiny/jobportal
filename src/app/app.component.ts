@@ -22,11 +22,12 @@ export class AppComponent {
     this.users = res;
     });
 
-    this.userStore['getFirstNameFromStore']()
-    .subscribe((val: any)=>{
-      const FirstNameFromToken = this.auth.getfullNameFromToken();
-      this.FirstName = val || FirstNameFromToken
-    });
+    // this.userStore['getFirstNameFromStore']()   
+    
+    // .subscribe((val: any)=>{
+    //   const FirstNameFromToken = this.auth.getfullNameFromToken();
+    //   this.FirstName = val || FirstNameFromToken
+    // });
 
     this.userStore.getRoleFromStore()
     .subscribe((val: any)=>{

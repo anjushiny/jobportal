@@ -10,7 +10,7 @@ import { TokenuserApiModel } from '../models/tokenuser-api.model';
 export class AuthnService {
 
   // private baseUrl: string = 'https://localhost:7058/api/User/';
-  private Url: string = 'https://localhost:7058/api/applicant/';
+  private Url: string = 'https://localhost:7058/api/Applicant/';
   private userPayload:any;
   constructor(private http: HttpClient, private router: Router) {
     this.userPayload = this.decodedToken();

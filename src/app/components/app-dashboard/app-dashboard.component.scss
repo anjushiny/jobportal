@@ -1,78 +1,7 @@
-// html,body {
-//     height: 100vh;
-//     margin: 0;
-//     padding: 0%;
-//     background-color: #2B3467;
-  
-//   }
-//   .body{
-//     height: 100vh;
-//     display: flex;
-//     margin: 0;
-//     padding: 0;
-//     width: auto;
-//     background-color: #2B3467;
-//   }
-  
-  // .container {
-  //   display: flex;
-  //   height: 100%;
-  // }
 
   
-  // .sidebar {
-  //   background: red;
-  //   padding: 20px;
-  //   width: 25%;
-    
-  // }
-  
-  // .sidebar nav ul {
-  //   list-style: none;
-  //   padding: 0;
-  //   margin: 0;
-  // }
-  
-  // .sidebar nav ul li {
-  //   margin-bottom: 10px;
-  // }
-  
-  // .sidebar nav ul li a {
-  //   text-decoration: none;
-  //   color: #333;
-  // }
-  
-  // .content {
-  //   background: red;
-  //   padding: 20px;
-  //   width: 75%;
-  //   overflow-y: scroll;
-  // }
-  
-  // .headings {
-  //   margin-bottom: 20px;
-  // }
-  
-  // h2 {
-  //   margin-top: 0;
-  // }
-  
-  // .navbar-nav.flex-column {
-  //   flex-direction: column;
-  // }
-  // .image{
-  //   height: 280px;
-  //   width: 200px;
-  //   padding: 10px;
-  //   margin-left: 20px;
-  // }
-  // .size{
-  //   font-size: 30px;
-  //   margin-left: 20px;
-  // }
-  
   .sign-button{
-    background: #9A1663; 
+    background: #9f5959; 
     color: #fff; 
     border-radius: 10px 4px 12px 6px; 
 
@@ -81,15 +10,39 @@
  
     font-size: 15px;
     text-align: center;
+    margin-top:20px;
   }
 
-
-
-// .navbar {
-//   position: fixed;
-//   top: 0;
-//   width: 100%;
-//   background-color: #f8f8f8;
-//   padding: 10px;
-//   z-index: 9999;
-// }
+  .navbar {
+    background-color: #333;
+  }
+  
+  .navbar-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-item {
+    margin-right: 20px; /* Adjust the margin value as needed */
+  }
+  
+  .nav-link {
+    color: rgb(214, 193, 193);
+    font-size: 20px;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+  }
+  
+  .nav-link:hover {
+    background-color: #b9a3a3;
+  }
+  
+  .nav-link.active {
+    background-color: #baa7a7;
+    font-weight: bold;
+  }

@@ -20,13 +20,8 @@ import { AppJobsComponent } from './components/app-jobs/app-jobs.component';
 import { AppAppliedComponent } from './components/app-applied/app-applied.component';
 import { AppHomeComponent } from './components/app-home/app-home.component';
 import { ClientHomeComponent } from './components/client-home/client-home.component';
-
-
-
-
-
-
-
+import { HighlightPipePipe } from './highlight-pipe.pipe';
+import { FilterPipe } from './filter.pipe';
 
 
 @NgModule({
@@ -44,10 +39,10 @@ import { ClientHomeComponent } from './components/client-home/client-home.compon
     AppAppliedComponent,
     AppHomeComponent,
     ClientHomeComponent,
+    HighlightPipePipe,
+    FilterPipe,
    
-    
-   
-   
+  
   ],
   imports: [
     BrowserModule,
@@ -55,8 +50,8 @@ import { ClientHomeComponent } from './components/client-home/client-home.compon
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    NgToastModule
-    
+    NgToastModule,
+   
   ],
   providers: [{
     provide:HTTP_INTERCEPTORS,
@@ -68,6 +63,7 @@ import { ClientHomeComponent } from './components/client-home/client-home.compon
   multi: true
 }
 ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule { }

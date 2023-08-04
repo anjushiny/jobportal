@@ -1,230 +1,130 @@
-<!-- <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+ 
 
 </head>
 <body>
-  
-  <div class="container">
-   
-    <form #contactForm="ngForm" (ngSubmit)="postcontact(contactForm.value)">
-     <div class="total">
-     <div class="row">
-      <h3>JOBID</h3>
-      <input type="text" placeholder="ENTER JOBID" name="jobId" ngModel>
-      <h3>COMPANY NAME</h3>
-      <input type="text" placeholder="ENTER COMPANY NAME" name="companyName" ngModel required>
-      <h3>JOB TITLE</h3>
-      <input type="text" placeholder="Enter JOBTITLE" name="jobTitle" ngModel required>
-      <h3>EXPERIENCE</h3>
-      <input type="text" placeholder="Enter Experience" name="experience" ngModel required>
-</div>
-<div class="row mar">
-<h3>SKILLS</h3>
-  <input type="text" placeholder="Enter Skills" name="skills" ngModel required>
-  <h3>JOB TYPE</h3>
-      <input type="text" placeholder="Enter JOB TYPE" name="jobType" ngModel required>
-      <h3>LOCATION</h3>
-      <input type="text" placeholder="Enter Location" name="location" ngModel required>
-      <h3>JOB DESCRIPTION</h3>
-      <input placeholder="Enter JOB DESCRIPTION" name="jobDescription" ngModel required>
-</div>
-</div>
-      <button type="submit" [disabled]="!contactForm.valid" style="background-color: rgb(69, 156, 100);">Post Job</button>
-    </form>
-    <h1 *ngIf="istrue" style="color: green;">Job Posted Sucessfully</h1>
-  </div>
-  
+  <h2 class="head">POST A JOB HERE</h2>
+  <div class="fields">
+    <form [formGroup]="jobForm" (ngSubmit)="postcontact()">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="companyName" class="heading">COMPANY NAME</label>
+            <input type="text" class="form-control large-input" placeholder="Enter Company Name" formControlName="companyName">
+            <small *ngIf="jobForm.get('companyName')!.invalid && (jobForm.get('companyName')?.dirty || jobForm.get('companyName')!.touched)" class="text-danger">*Company Name is required*</small>
+            <small *ngIf="jobForm.get('companyName')?.hasError('alphabeticOnly') && (jobForm.get('companyName')?.dirty || jobForm.get('companyName')?.touched)"
+              class="text-danger">*Company Name must contain alphabetic characters*</small>
 
-</body>
-</html>
- -->
-
-
- <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
- 
-
-  <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: white;
-    }
-
- 
-
-    .form-container {
-      width: 800px;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
- 
-
-    .form-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 15px;
-    }
-
- 
-
-    .form-group {
-      flex-grow: 1;
-      margin-right: 10px;
-    }
-
- 
-
-    .form-group label {
-      font-weight: bold;
-    }
-
- 
-
-    .form-group input,
-    .form-group textarea {
-      border-radius: 20px;
-      padding: 10px;
-      border: 1px solid #ccc;
-    }
-
- 
-
-    .form-group textarea {
-    border-radius: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    width: 100%;
-    font-size: 16px;
-    resize: vertical;
-    height: 120px;
-  }
-
- 
-
-    .btn-primary {
-      background-color: #4CAF50;
-      border: none;
-      border-radius: 20px;
-      padding: 10px 15px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
- 
-
-    .success-message {
-      color: green;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-</style>
-</head>
-
- 
-
-<body>
-<div class="form-container">
-<h1 class="text-center">Job Posting Form</h1>
-<form #contactForm="ngForm" (ngSubmit)="postcontact(contactForm.value)">
-<div class="form-row">
-<div class="form-group">
-<label for="jobId">Job ID</label>
-<input type="text" class="form-control" id="jobId" placeholder="Enter Job ID" name="jobId" ngModel>
-</div>
-<div class="form-group">
-<label for="companyName">Company Name</label>
-<input type="text" class="form-control" id="companyName" placeholder="Enter Company Name" name="companyName" ngModel required>
-</div>
-</div>
-<div class="form-row">
-<div class="form-group">
-<label for="jobTitle">Job Title</label>
-<input type="text" class="form-control" id="jobTitle" placeholder="Enter Job Title" name="jobTitle" ngModel required>
-</div>
-<div class="form-group">
-<label for="experience">Experience</label>
-<input type="text" class="form-control" id="experience" placeholder="Enter Experience" name="experience" ngModel required>
-</div>
-</div>
-<div class="form-row">
-<div class="form-group">
-<label for="skills">Skills</label>
-<input type="text" class="form-control" id="skills" placeholder="Enter Skills" name="skills" ngModel required>
-</div>
-<div class="form-group">
-<label for="jobType">Job Type</label>
-<input type="text" class="form-control" id="jobType" placeholder="Enter Job Type" name="jobType" ngModel required>
-</div>
-</div>
-<div class="form-row">
-<div class="form-group">
-<label for="location">Location</label>
-<input type="text" class="form-control" id="location" placeholder="Enter Location" name="location" ngModel required>
-</div>
-<div class="form-group">
-<label for="vacancy">Vacancy</label>
-<input type="text" class="form-control" id="vacancy" placeholder="Enter Vacancy" name="vacancy" ngModel required>
-</div>
-
- 
-
+          </div>
+          <div class="form-group">
+            <label for="jobTitle" class="heading">JOB TITLE</label>
+            <input type="text" class="form-control large-input" placeholder="Enter Job Title" formControlName="jobTitle">
+            <small *ngIf="jobForm.get('jobTitle')!.invalid && (jobForm.get('jobTitle')?.dirty || jobForm.get('jobTitle')!.touched)" class="text-danger">*Job Title is required*</small>
+            <small *ngIf="jobForm.get('jobTitle')?.hasError('alphabeticOnly') && (jobForm.get('jobTitle')?.dirty || jobForm.get('jobTitle')?.touched)"
+              class="text-danger">*jobTitle must contain alphabetic characters*</small>
+          </div>
+          <div class="form-group">
+            <label for="experience" class="heading">EXPERIENCE</label>
+            <input type="text" class="form-control large-input" placeholder="Enter Experience" formControlName="experience">
+            <small *ngIf="jobForm.get('experience')!.invalid && (jobForm.get('experience')?.dirty || jobForm.get('experience')!.touched)" class="text-danger">*Experience is required*</small>
+          </div>
+          <div class="form-group">
+            <label for="skills" class="heading">SKILLS</label>
+            <input type="text" class="form-control large-input" placeholder="Enter Skills" formControlName="skills">
+            <small *ngIf="jobForm.get('skills')!.invalid && (jobForm.get('skills')?.dirty || jobForm.get('skills')!.touched)" class="text-danger">*Skills are required*</small>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="jobPositions" class="heading">JOB POSITIONS</label>
+            <input type="number" class="form-control large-input" placeholder="Enter Positions" formControlName="jobPositions">
+            <small *ngIf="jobForm.get('jobPositions')!.invalid && (jobForm.get('jobPositions')?.dirty || jobForm.get('jobPositions')!.touched)" class="text-danger">*Positions are required*</small>
+            <small *ngIf="jobForm.get('jobPositions')?.hasError('pattern') && (jobForm.get('jobPositions')?.dirty || jobForm.get('jobPositions')?.touched)"
+            class="text-danger">*Job Positions must be a positive number*</small>
+          </div>
+          <div class="form-group">
+            <label for="jobType" class="heading">JOB TYPE</label>
+            <input type="text" class="form-control large-input" placeholder="Enter Job Type" formControlName="jobType">
+            <small *ngIf="jobForm.get('jobType')!.invalid && (jobForm.get('jobType')?.dirty || jobForm.get('jobType')!.touched)" class="text-danger">*Job Type is required*</small>
+          </div>
+          <div class="form-group">
+            <label for="qualification" class="heading">QUALIFICATION</label>
+            <input type="text" class="form-control large-input" placeholder="Enter Qualification" formControlName="qualification">
+            <small *ngIf="jobForm.get('qualification')!.invalid && (jobForm.get('qualification')?.dirty || jobForm.get('qualification')!.touched)" class="text-danger">*Qualification is required*</small>
+          </div>
+          <div class="form-group">
+            <label for="postedDate" class="heading">POSTED DATE</label>
+            <input type="date" class="form-control large-input" formControlName="postedDate">
+            <small *ngIf="jobForm.get('postedDate')!.invalid && (jobForm.get('postedDate')?.dirty || jobForm.get('postedDate')!.touched)" class="text-danger">*Posted Date is required*</small>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="endDate" class="heading">END DATE</label>
+            <input type="date" class="form-control large-input" formControlName="endDate">
+            <small *ngIf="jobForm.get('endDate')!.invalid && (jobForm.get('endDate')?.dirty || jobForm.get('endDate')!.touched)" class="text-danger">*End Date is required*</small>
+            <small *ngIf="jobForm.get('endDate')?.hasError('dateComparison') && (jobForm.get('endDate')?.dirty || jobForm.get('endDate')?.touched)"
+            class="text-danger">*End Date must be greater than Posted Date*</small>
+          </div>
+          <div class="form-group">
+            <label for="salary" class="heading">SALARY</label>
+            <input type="number" class="form-control large-input" placeholder="Enter Salary" formControlName="salary">
+            <small *ngIf="jobForm.get('salary')!.invalid && (jobForm.get('salary')?.dirty || jobForm.get('salary')!.touched)" class="text-danger">*Salary is required*</small>
+            <small *ngIf="jobForm.get('salary')?.hasError('pattern') && (jobForm.get('salary')?.dirty || jobForm.get('salary')?.touched)"
+            class="text-danger">*Salary must be a positive number*</small>
+          </div>
+          <div class="form-group">
+            <label for="location" class="heading">LOCATION</label>
+            <input type="text" class="form-control large-input" placeholder="Enter Location" formControlName="location">
+            <small *ngIf="jobForm.get('location')!.invalid && (jobForm.get('location')?.dirty || jobForm.get('location')!.touched)" class="text-danger">*Location is required*</small>
+            <small *ngIf="jobForm.get('location')?.hasError('alphabeticOnly') && (jobForm.get('location')?.dirty || jobForm.get('location')?.touched)"
+            class="text-danger">*Location must contain alphabetic characters*</small>
+          </div>
+          <div class="form-group">
+            <label for="description" class="heading">DESCRIPTION</label>
+            <textarea rows="3" class="form-control large-textarea" placeholder="Enter Description" formControlName="description"></textarea>
+            <small *ngIf="jobForm.get('description')!.invalid && (jobForm.get('description')?.dirty || jobForm.get('description')!.touched)" class="text-danger">*Description is required*</small>
+          </div>
+        </div>
       </div>
-<div class="form-row">
-<div class="form-group">
-<label for="startDate">Start Date</label>
-<input type="date" class="form-control" id="startDate" name="startDate" ngModel required>
-</div>
-<div class="form-group">
-<label for="endDate">End Date</label>
-<input type="date" class="form-control" id="endDate" name="endDate" ngModel required>
-</div>
-</div>
-<div class="form-row">
-<div class="form-group">
-<label for="salary">Salary</label>
-<input type="text" class="form-control" id="salary" placeholder="Enter Salary" name="salary" ngModel required>
-</div>
-<div class="form-group">
-<label for="workSchedule">Work Schedule</label>
-<select class="form-control" id="workSchedule" name="workSchedule" ngModel required>
-<option value="Full-time">Morning Shift</option>
-<option value="Part-time">Night shift</option>
-</select>
-</div>
-</div>
+      <div class="row">
 
-<div class="form-row">
-<div class="form-group">
-<label for="description">Job Description</label>
-<textarea class="form-control" id="description" rows="4" placeholder="Enter Job Description" name="description" ngModel required></textarea>
-</div>
-</div>
-
+        <div class="col-md-12">
+          <div class="button-container text-center">
+            <button type="submit" class="btn btn-primary large-button" [disabled]="jobForm.invalid">Post Job</button>
+          </div>
+        </div>
+      </div>
+    
+    </form>
+   <h3 *ngIf="istrue">Job Posted Successfully</h3>
+  </div>
  
-
-      <div class="text-center">
-<button type="submit" class="btn btn-primary" [disabled]="!contactForm.valid">Post Job</button>
-</div>
-</form>
-<h1 class="success-message text-center" *ngIf="istrue">Job Posted Successfully</h1>
-</div>
-
- 
-
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+ <!-- Bootstrap JS -->
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
